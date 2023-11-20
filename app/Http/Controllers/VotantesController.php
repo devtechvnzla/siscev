@@ -68,10 +68,19 @@ class VotantesController extends Controller
 
     public function personal($id)
     {
-       $personal = Personal::where('status',1)
+      if ($id != 23) {
+        $personal = Personal::where('status',1)
+        ->where('gerencia_id',$id)
+        ->get();
+        return $personal;
+      } else {
+        $personal = Personal::where('status',2)
        ->where('gerencia_id',$id)
        ->get();
        return $personal;
+      }
+
+
     }
 
 
@@ -148,33 +157,27 @@ class VotantesController extends Controller
     public function store(Request $request)
     {
 
-        $votante = new Votantes();
+        $votante =  Votantes::where('personal_id',$request->personal_id)->first();
 
+        if ($votante->confirmed == $request->confirmed) {
+            $notification = array(
+                'message' => '¡Lo siento, acción no permitida!',
+                'alert-type' => 'error'
+            );
+                 return redirect()->back()->with($notification);
+        } else {
+            $votante->gerencia_id = $request->gerencia_id;
+            $votante->ente_id = $request->ente_id;
+            $votante->personal_id = $request->personal_id;
+            $votante->confirmed = $request->confirmed;
+            $votante->save();
+            $notification = array(
+                'message' => '¡Ya ejerció el voto!',
+                'alert-type' => 'success'
+            );
+            return redirect()->back()->with($notification);
+        }
 
-
-
-
-       $votante->gerencia_id = $request->gerencia_id;
-       $votante->ente_id = $request->ente_id;
-       $votante->personal_id = $request->personal_id;
-       $votante->confirmed = $request->confirmed;
-       $votante->save();
-
-       if ($votante->confirmed == 0) {
-           $notification = array(
-            'message' => '¡No ejerció el voto!',
-            'alert-type' => 'error'
-        );
-             return redirect()->back()->with($notification);
-       }
-
-       //dd($votante);
-
-         $notification = array(
-            'message' => '¡Ya ejerció el voto!',
-            'alert-type' => 'success'
-        );
-             return redirect()->back()->with($notification);
 
     }
 

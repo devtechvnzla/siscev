@@ -2,8 +2,8 @@
 @section('title', 'Inicio')
 @section('content')
 
+<div class="container-fluid">
  @if ( Auth::user()->hasRole('Caacas'))
-  <div class="container">
       <div class="row">
           <div class="col-lg-3 col-6">
             <!-- small box -->

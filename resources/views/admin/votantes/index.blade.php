@@ -60,7 +60,6 @@
                 <div class="checkbox icheck text-center">
                   <label class="font-weight-bolder">
                     <input type="radio" name="confirmed" value="1" checked> SÍ&nbsp;&nbsp;
-                    <input type="radio" name="confirmed" value="0"> NO
                   </label>
                 </div>
               </div>
