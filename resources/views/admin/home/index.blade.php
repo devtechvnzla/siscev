@@ -63,70 +63,97 @@
 
 
 @else
+<h2 class="">Personal de Bandes</h2>
+    <div class="row">
+    <div class="col-lg-6 col-6">
+        <!-- small box -->
+        <div class="small-box green darken-3 text-white">
+        <div class="inner">
+            <h3>{{ App\Models\Personal::where('ente_id',1)->count() }}</h3>
 
+            <p>FUNCIONARIOS EN GENERAL </p>
+        </div>
+        <div class="icon">
+            <i class="fas fa-user-tie"></i>
+        </div>
 
-     <h2 class="">Personal de Bandes</h2>
-          <div class="row">
-            <div class="col-lg-6 col-6">
-              <!-- small box -->
-              <div class="small-box green darken-3 text-white">
-                <div class="inner">
-                  <h3>{{ App\Models\Personal::where('ente_id',1)->count() }}</h3>
+        </div>
+    </div>
+    <div class="col-lg-6 col-6">
+        <!-- small box -->
+        <div class="small-box green darken-3 text-white">
+        <div class="inner">
+            <h3>{{ App\Models\Gerencias::where('ente_id',1)->count() }}</h3>
 
-                  <p>FUNCIONARIOS </p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-user-tie"></i>
-                </div>
+            <p>GERENCIAS </p>
+        </div>
+        <div class="icon">
+            <i class="fas fa-building"></i>
+        </div>
 
-              </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-6">
+        <!-- small box -->
+        <div class="small-box green darken-3 text-white">
+            <div class="inner">
+            <h3>{{ App\Models\Personal::where('ente_id',1)
+            ->where('status',1)
+            ->count() }}</h3>
+
+            <p>FUNCIONARIOS ACTIVOS </p>
             </div>
-            <div class="col-lg-6 col-6">
-              <!-- small box -->
-              <div class="small-box green darken-3 text-white">
-                <div class="inner">
-                  <h3>{{ App\Models\Gerencias::where('ente_id',1)->count() }}</h3>
-
-                  <p>GERENCIAS </p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-building"></i>
-                </div>
-
-              </div>
-            </div>
-            <div class="col-lg-6 col-6">
-              <!-- small box -->
-              <div class="small-box green darken-4 text-white">
-                <div class="inner">
-                  <h3>{{ App\Models\Votantes::where('confirmed',1)->where('ente_id',1)->count() }}</h3>
-
-                  <p>FUNCIONARIOS QUE EJERCIERON EL VOTO</p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-check"></i>
-                </div>
-
-              </div>
-            </div>
-            <div class="col-lg-6 col-6">
-              <!-- small box -->
-              <div class="small-box green darken-4 text-white">
-                <div class="inner">
-                  <h3>{{ App\Models\Votantes::where('confirmed',0)->where('ente_id',1)->count() }}</h3>
-
-                  <p>FUNCIONARIOS QUE NO EJERCIERON EL VOTO</p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-not-equal"></i>
-                </div>
-
-              </div>
+            <div class="icon">
+            <i class="fas fa-user-tie"></i>
             </div>
 
-           </div>
-            <!-- /.card -->
-          </div>
+        </div>
+        </div>
+        <div class="col-lg-6 col-6">
+        <!-- small box -->
+        <div class="small-box green darken-3 text-white">
+            <div class="inner">
+            <h3>{{ App\Models\Personal::where('ente_id',1)
+            ->where('status',2)
+            ->count() }}</h3>
+
+            <p>FUNCIONARIOS JUBILADOS </p>
+            </div>
+            <div class="icon">
+            <i class="fas fa-user-tie"></i>
+            </div>
+
+        </div>
+        </div>
+    <div class="col-lg-6 col-6">
+        <!-- small box -->
+        <div class="small-box green darken-4 text-white">
+        <div class="inner">
+            <h3>{{ App\Models\Votantes::where('confirmed',1)->where('ente_id',1)->count() }}</h3>
+            <p>FUNCIONARIOS QUE EJERCIERON EL VOTO</p>
+            </div>
+        <div class="icon">
+            <i class="fas fa-check"></i>
+        </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-6">
+        <!-- small box -->
+        <div class="small-box green darken-4 text-white">
+        <div class="inner">
+            <h3>{{ App\Models\Votantes::where('confirmed',0)->where('ente_id',1)->count() }}</h3>
+            <p>FUNCIONARIOS QUE NO EJERCIERON EL VOTO</p>
+        </div>
+        <div class="icon">
+            <i class="fas fa-not-equal"></i>
+        </div>
+
+        </div>
+    </div>
+
+    </div>
+    <!-- /.card -->
+    </div>
 
 
 

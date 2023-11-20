@@ -20,6 +20,7 @@ class PersonalController extends Controller
     public function index()
     {
         $personales = Personal::get();
+
         return view ('admin.personal.index',compact('personales'));
     }
 

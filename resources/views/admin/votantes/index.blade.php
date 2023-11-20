@@ -29,26 +29,26 @@
               <div class="col-md-4">
                 <legend>Datos del votante</legend>
                 {!! Form::open(['route' => ['votantes.store'],'method' => 'POST','id'=>'votantes_form']) !!}
-                  
+
                    <div class="form-group">
-           
+
                     <label>Ente del empleado</label>
-                     
+
                   @php
                     $entes = App\Models\Ente::pluck('descripcion', 'id')
                   @endphp
-                     {!! Form::select('ente_id', $entes, null,array('class' => 'form-control input-sm  ente_form','placeholder'=>'Selecione el ente ','data-width'=>'100%')) !!}    
-               
+                     {!! Form::select('ente_id', $entes, null,array('class' => 'form-control input-sm  ente_form','placeholder'=>'Selecione el ente ','data-width'=>'100%')) !!}
+
                   </div>
                    <div class="form-group">
-                     
+
                     <label>Gerencia del empleado</label>
-                     
-                 
+
+
                      <select name="gerencia_id"  class="form-control input-sm select2 gerencia_form">
-                        
-                     </select>  
-               
+
+                     </select>
+
                     </div>
                   <div class="form-group">
                     <label>Funcionario</label>
@@ -69,7 +69,7 @@
                   </div>
                 {!! Form::close()!!}
               </div>
-              <div class="col-md-8"><br> 
+              <div class="col-md-8"><br>
                 <div class="table-responsive">
                   <table id="tableExport" class="table table-striped table-bordered">
                     <thead>
@@ -80,7 +80,7 @@
                         <th>Gerencia del funcionario</th>
                         <th>¿El funcionario ejerció el voto?</th>
                         <th>Fecha de registro</th>
-                      </tr>                             
+                      </tr>
                     </thead>
                     <tbody>
                       @foreach($votantes->sortByDesc('updated_at') as $c)
@@ -89,7 +89,7 @@
                               {{ $c->personal->tx_nombres }} {{ $c->personal->tx_apellidos }}
                           </td>
                           <td>
-                              {{ $c->personal->cedula }} 
+                              {{ $c->personal->cedula }}
                           </td>
                           <td>{{ $c->ente->descripcion }}</td>
                           <td>
@@ -137,23 +137,23 @@
 $(document).ready(function() {
 
   form = $('#personal_form');
-     
+
     $.fn.eventos();
 
-    
-  
+
+
 
   //$('#objetivos').hide();
-    
+
 });
 
 
 $.fn.eventos = function(){
 
 
-  
+
   $('.ente_form').on("change", function(e) { //asigno el evento change u otro
-   
+
     ente_form = e.target.value;
     console.log(ente_form);
     if(ente_form != '0')
@@ -162,13 +162,13 @@ $.fn.eventos = function(){
       $.fn.get_municipio(ente_form);
       $(".gerencia_form").removeAttr('disabled');
 
-     
+
     }else{
       console.log('epa selecciona un proyecto valido');
     }
 
   });
-  
+
 }
 
 /********* AJAX ***********/
@@ -180,14 +180,14 @@ $.fn.get_municipio = function(ente_form){
         //data: {'gerencias': estados_id}
       }).then(function(result) {
         console.log(result);
-          
+
         $('.gerencia_form').html('<option value=""> Seleccione la gerencia del funcionario </option>');
-        
+
 
         $(result).each(function( index, element ) {
           console.log(element.descricion);
           $('.gerencia_form').append('<option value="'+ element.id +'">'+ element.descricion +' </option>');
-      
+
         });
       })
       .catch(function(err) {
@@ -199,9 +199,9 @@ $.fn.get_municipio = function(ente_form){
 
 
 
-  
+
   $('.gerencia_form').on("change", function(e) { //asigno el evento change u otro
-   
+
     gerencia_form = e.target.value;
     console.log(gerencia_form);
     if(gerencia_form != '0')
@@ -210,13 +210,13 @@ $.fn.get_municipio = function(ente_form){
       $.fn.get_empleados(gerencia_form);
       $(".gerencia_form").removeAttr('disabled');
 
-     
+
     }else{
       console.log('epa selecciona un proyecto valido');
     }
 
   });
-  
+
 
   /********* AJAX ***********/
 
@@ -227,14 +227,14 @@ $.fn.get_empleados = function(gerencia_form){
         //data: {'gerencias': estados_id}
       }).then(function(result) {
         console.log(result);
-          
+
          $('#persona_id').html('<option value=""> Seleccione el funcionario </option>');
-        
+
 
         $(result).each(function( index, element ) {
           console.log(element.tx_nombres);
           $('#persona_id').append('<option value="'+ element.id +'">'+ element.cedula +' | '+ element.tx_nombres +' '+'</option>');
-      
+
         });
       })
       .catch(function(err) {
@@ -246,7 +246,7 @@ $.fn.get_empleados = function(gerencia_form){
 
 
 
- 
+
 
   </script>
 @endpush

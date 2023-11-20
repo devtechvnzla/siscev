@@ -19,7 +19,6 @@ class VotantesController extends Controller
     public function index()
     {
        $votantes = Votantes::get();
-
        return view ('admin.votantes.index', compact('votantes'));
     }
 
@@ -69,7 +68,9 @@ class VotantesController extends Controller
 
     public function personal($id)
     {
-       $personal = Personal::where('gerencia_id',$id)->get();
+       $personal = Personal::where('status',1)
+       ->where('gerencia_id',$id)
+       ->get();
        return $personal;
     }
 

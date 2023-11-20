@@ -7,7 +7,7 @@
     <div class="card card-line-primary">
       <div class="card-header">
         <h3>Listado del personal actualmente registrado.</h3>
-       
+
       </div>
        <!-- /.card-header -->
           <div class="card-body table-responsive">
@@ -26,7 +26,7 @@
                 <a  data-toggle="modal" data-target="#personalModal" class="btn btn-sm green darken-3 text-white"><i class="mdi mdi-plus mt-2 text-white" data-toggle="tooltip" data-placement="top"
                       title="Registro de nuevo empleado."></i>Nuevo empleado</a>
               </li>
-           
+
             </ul><br>
           <table id="tableExport" class="display table table-hover ">
                     <thead>
@@ -37,39 +37,54 @@
                     <th>Ente</th>
                     <th>Gerencia</th>
                     <th>Estado del empleado</th>
-                    
-                    <th>Opciones</th> 
+
+                    <th>Opciones</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach ($personales as $personal)
-                 
+
                     <tr class="row{{ $personal->id }}">
-                   
+
                     <td>{{ $personal->id }}</td>
                     <td>{{ $personal->display_name }}</td>
                     <td>{{ $personal->cedula }}</td>
                     <td>{{ $personal->ente->descripcion }}</td>
                     <td>{{ $personal->gerencia->descricion }}</td>
-                   
-                     <td><span class="badge text-white {{ $personal->status ? 'badge-success' : 'badge-danger' }}">{{ $personal->display_status }}</span></td>
-                  
+
+                     <td>
+                        @if ($personal->status == 1)
+                        <span class="badge green text-white"> ACTIVO</span>
+                      @elseif ($personal->status == 2)
+                        <span class="badge blue  darken-4 text-white"> JUBILADO</span>
+                      @elseif ($personal->status == 3)
+                        <span class="badge red  darken-4 text-white"> SUSPENDIDO</span>
+                       @elseif($personal->status == 4)
+                        <span class="badge orange  darken-4 text-white"> EGRESADO</span>
+                        @elseif($personal->status == 5)
+                        <span class="badge yellow  darken-1 text-white"> Permiso</span>
+                        @else
+                            <span class="badge purple  darken-4 text-white"> Comision de servicio</span>
+
+                      @endif
+                     </td>
+
                     <td>
                      <a  data-toggle="modal" data-target="#personalModal{{$personal->id}}" class="btn btn-round green darken-3"><i class="mdi mdi-pencil mt-2 text-white" data-toggle="tooltip" data-placement="top"
-                      title="Editar datos del empleado."></i></a> 
+                      title="Editar datos del empleado."></i></a>
 
                        <a href="{{ url('/personal/borrar',$personal->id) }}"  class="btn btn-round green darken-3"><i class="mdi mdi-delete mt-2 text-white" data-toggle="tooltip" data-placement="top"
-                      title="Borrar datos del empleado."></i></a>   
+                      title="Borrar datos del empleado."></i></a>
 
                        <a href="{{ ('personal/'.$personal->id.'/1x10') }}" class="btn btn-round red darken-3"><i class="mdi mdi-plus mt-2 text-white" data-toggle="tooltip" data-placement="top"
-                      title="Registrar el 1x10 del empleado."></i></a>                    
-                      
+                      title="Registrar el 1x10 del empleado."></i></a>
+
                     </td>
                     </tr>
                     @include('layouts.partials.modal.personal.updatepersonal')
                     @endforeach
-                   
-                    </tbody>                
+
+                    </tbody>
                 </table>
           </div>
           <!-- /.card-body -->
@@ -96,11 +111,11 @@
     rules: {
       tx_nombres: {
         required: true,
-        
+
       },
       tx_apellidos: {
         required: true,
-       
+
       },
       cedula: {
         required: true,
@@ -109,12 +124,12 @@
        gerencia_id: {
         required: true
       },
-      
+
       ente_id: {
         required: true
       },
     },
-    messages: { 
+    messages: {
       tx_nombres: {
         required: "Por favor ingresar los nombres del empleado",
       },
@@ -133,7 +148,7 @@
         required: "Debes seleccionar el ente que pertenece el empleado."
 
       },
-       
+
     },
     errorElement: 'span',
     errorPlacement: function (error, element) {
