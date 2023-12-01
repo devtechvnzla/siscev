@@ -80,14 +80,14 @@
               </a>
           </li>
           @endcan
-            @can('voto_access')
+
            <li class="nav-item has-treeview ">
              <a href="/votantes" class="nav-link">
                   <i class="fas fa-check nav-icon"></i>
                   <p>Control de votos</p>
               </a>
           </li>
-          @endcan
+
            @can('votante_access')
            <li class="nav-item has-treeview ">
              <a href="/votante/1x10" class="nav-link">
